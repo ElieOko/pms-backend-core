@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer("parent_space_id")->default(1);
             $table->foreignId('branch_id')->nullable()->index();
+            $table->foreignId('clients_id')->nullable()->index();
+            $table->foreignId('reservations_id')->nullable()->index();
             $table->timestamps();
         });
     }
