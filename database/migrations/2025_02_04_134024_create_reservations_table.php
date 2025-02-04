@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->integer("parent_space_id")->default(1);
             $table->foreignId('branch_id')->nullable()->index();
+            $table->foreignId('client_id')->nullable()->index();
             $table->foreignId('room_id')->nullable()->index();
-            $table->foreignId('bed_room_id')->nullable()->index();
+            // $table->foreignId('bed_room_id')->nullable()->index();
+           
             $table->timestamps();
         });
     }
