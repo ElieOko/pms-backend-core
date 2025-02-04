@@ -17,8 +17,11 @@ return new class extends Migration
             $table->foreignId('branch_id')->nullable()->index();
             $table->foreignId('client_id')->nullable()->index();
             $table->foreignId('room_id')->nullable()->index();
-            // $table->foreignId('bed_room_id')->nullable()->index();
-           
+            $table->foreignId('bed_room_id')->nullable()->index();
+            $table->date('start_date')->nullable(); // Date de début
+            $table->date('end_date')->nullable();   // Date de fin
+            $table->integer('status')->default(0);  // Status (0, 1, 2)
+
             $table->timestamps();
         });
     }

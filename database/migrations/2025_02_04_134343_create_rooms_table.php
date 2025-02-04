@@ -16,6 +16,9 @@ return new class extends Migration
             $table->integer("parent_space_id")->default(1);
             $table->foreignId('branch_id')->nullable()->index();
             $table->string("number_room")->default("AB-12");
+            $table->string("capacite")->default("");
+            $table->integer("tarif_base")->default(10);
+            $table->integer("promotion_tarif")->nullable()->default(10);
             $table->boolean("is_reserve")->default(false);
             $table->timestamps();
         });
