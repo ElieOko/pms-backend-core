@@ -10,6 +10,8 @@ class Plat extends Model
     protected $fillable = [
         'parent_space_id',
         'branch_id',
-        'nom'
+        'nom',
+        'prix',
+        'image'
     ];
 }
