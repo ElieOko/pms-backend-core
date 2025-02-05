@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cantine;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CantineController extends Controller
 {
@@ -28,7 +29,27 @@ class CantineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'nom' =>'required',
+            'type_cantine_id' =>'required',
+            'parent_space_id'=>'required',
+            'branch_id'=>'required'
+        ]);
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator->errors()
+             ],402);
+        }
+        $field = $validator->validated();
+        Cantine::updateOrCreate([
+            'nom'               =>   $field['nom'],
+            'type_cantine_id' => $field['type_cantine_id'],
+            'parent_space_id'   =>   $field['parent_space_id'],
+            'branch_id'         =>   $field['branch_id']
+        ]);
+        return response()->json([
+            'message' => $this->msg_success,
+         ],$this->status_ok);
     }
 
     /**

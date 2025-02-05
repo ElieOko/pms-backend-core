@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Segmentation;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SegmentationController extends Controller
 {
@@ -28,7 +29,23 @@ class SegmentationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'parent_space_id'=>'required',
+            'branch_id'=>'required'
+        ]);
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator->errors()
+             ],402);
+        }
+        $field = $validator->validated();
+        TypeBedRoom::updateOrCreate([
+            'parent_space_id'   =>   $field['parent_space_id'],
+            'branch_id'         =>   $field['branch_id']
+        ]);
+        return response()->json([
+            'message' => $this->msg_success,
+         ],$this->status_ok);
     }
 
     /**
