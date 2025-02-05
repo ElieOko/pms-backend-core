@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\TypeCantine;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\TypeCantineCollection;
 
 class TypeCantineController extends Controller
 {
@@ -12,7 +14,13 @@ class TypeCantineController extends Controller
      */
     public function index()
     {
-        //
+        $data = TypeCantine::all();
+        if($data->count() != 0 ){
+            return new TypeCantineCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

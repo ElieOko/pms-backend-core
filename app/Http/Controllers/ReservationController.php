@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use App\Http\Resources\ReservationCollection;
 
 class ReservationController extends Controller
 {
@@ -12,7 +13,13 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        $data = Reservation::all();
+        if($data->count() != 0 ){
+            return new ReservationCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

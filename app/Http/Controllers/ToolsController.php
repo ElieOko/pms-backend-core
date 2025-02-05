@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tools;
 use Illuminate\Http\Request;
+use App\Http\Resources\ToolsCollection;
 
 class ToolsController extends Controller
 {
@@ -12,7 +13,13 @@ class ToolsController extends Controller
      */
     public function index()
     {
-        //
+        $data = Tools::all();
+        if($data->count() != 0 ){
+            return new ToolsCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cantine;
 use Illuminate\Http\Request;
+use App\Http\Resources\CantineCollection;
 
 class CantineController extends Controller
 {
@@ -12,7 +13,13 @@ class CantineController extends Controller
      */
     public function index()
     {
-        //
+        $data = Cantine::all();
+        if($data->count() != 0 ){
+            return new CantineCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

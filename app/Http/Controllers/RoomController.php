@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Room;
 use Illuminate\Http\Request;
+use App\Http\Resources\RoomCollection;
 
 class RoomController extends Controller
 {
@@ -12,7 +13,13 @@ class RoomController extends Controller
      */
     public function index()
     {
-        //
+        $data = Room::all();
+        if($data->count() != 0 ){
+            return new RoomCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

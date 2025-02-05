@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use App\Http\Resources\MenuCollection;
 
 class MenuController extends Controller
 {
@@ -12,7 +13,13 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
+        $data = Menu::all();
+        if($data->count() != 0 ){
+            return new MenuCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

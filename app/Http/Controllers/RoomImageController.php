@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RoomImage;
 use Illuminate\Http\Request;
+use App\Http\Resources\RoomImageCollection;
 
 class RoomImageController extends Controller
 {
@@ -12,7 +13,13 @@ class RoomImageController extends Controller
      */
     public function index()
     {
-        //
+        $data = RoomImage::all();
+        if($data->count() != 0 ){
+            return new RoomImageCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**
