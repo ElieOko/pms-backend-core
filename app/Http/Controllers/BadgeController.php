@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Badge;
 use Illuminate\Http\Request;
+use App\Http\Resources\BadgeCollection;
 
 class BadgeController extends Controller
 {
@@ -13,6 +14,13 @@ class BadgeController extends Controller
     public function index()
     {
         //
+        $data = Badge::all();
+        if($data->count() != 0 ){
+            return new BadgeCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

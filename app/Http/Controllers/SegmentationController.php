@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Segmentation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SegmentationCollection;
 
 class SegmentationController extends Controller
 {
@@ -13,7 +14,13 @@ class SegmentationController extends Controller
      */
     public function index()
     {
-        //
+        $data = Segmentation::all();
+        if($data->count() != 0 ){
+            return new SegmentationCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

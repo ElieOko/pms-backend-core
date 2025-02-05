@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RecettePlat;
 use Illuminate\Http\Request;
+use App\Http\Resources\RecettePlatCollection;
 
 class RecettePlatController extends Controller
 {
@@ -12,7 +13,13 @@ class RecettePlatController extends Controller
      */
     public function index()
     {
-        //
+        $data = RecettePlat::all();
+        if($data->count() != 0 ){
+            return new RecettePlatCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

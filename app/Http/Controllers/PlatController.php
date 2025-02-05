@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Plat;
 use Illuminate\Http\Request;
+use App\Http\Resources\PlatCollection;
 
 class PlatController extends Controller
 {
@@ -12,7 +13,13 @@ class PlatController extends Controller
      */
     public function index()
     {
-        //
+        $data = Plat::all();
+        if($data->count() != 0 ){
+            return new PlatCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

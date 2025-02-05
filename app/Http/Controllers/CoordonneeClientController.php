@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CoordonneeClient;
 use Illuminate\Http\Request;
+use App\Models\CoordonneeClient;
+use App\Http\Resources\CoordonneeClientCollection;
 
 class CoordonneeClientController extends Controller
 {
@@ -12,7 +13,13 @@ class CoordonneeClientController extends Controller
      */
     public function index()
     {
-        //
+        $data = CoordonneeClient::all();
+        if($data->count() != 0 ){
+            return new CoordonneeClientCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

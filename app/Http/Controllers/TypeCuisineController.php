@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\TypeCuisine;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\TypeCuisineCollection;
 
 class TypeCuisineController extends Controller
 {
@@ -12,7 +14,13 @@ class TypeCuisineController extends Controller
      */
     public function index()
     {
-        //
+        $data = TypeCuisine::all();
+        if($data->count() != 0 ){
+            return new TypeCuisineCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

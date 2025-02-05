@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HistoriqueReservation;
 use Illuminate\Http\Request;
+use App\Models\HistoriqueReservation;
+use App\Http\Resources\HistoriqueReservationCollection;
 
 class HistoriqueReservationController extends Controller
 {
@@ -12,7 +13,13 @@ class HistoriqueReservationController extends Controller
      */
     public function index()
     {
-        //
+        $data = HistoriqueReservation::all();
+        if($data->count() != 0 ){
+            return new HistoriqueReservationCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TypeProgrammeFidelisation;
 use Illuminate\Http\Request;
+use App\Models\TypeProgrammeFidelisation;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\TypeProgrammeFidelisationCollection;
 
 class TypeProgrammeFidelisationController extends Controller
 {
@@ -12,7 +14,13 @@ class TypeProgrammeFidelisationController extends Controller
      */
     public function index()
     {
-        //
+        $data = TypeProgrammeFidelisation::all();
+        if($data->count() != 0 ){
+            return new TypeProgrammeFidelisationCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BedRoomTools;
 use Illuminate\Http\Request;
+use App\Http\Resources\BedRoomToolsCollection;
 
 class BedRoomToolsController extends Controller
 {
@@ -12,7 +13,13 @@ class BedRoomToolsController extends Controller
      */
     public function index()
     {
-        //
+        $data = BedRoomTools::all();
+        if($data->count() != 0 ){
+            return new BedRoomToolsCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

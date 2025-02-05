@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BedRoomImage;
 use Illuminate\Http\Request;
+use App\Http\Resources\BedRoomImageCollection;
 
 class BedRoomImageController extends Controller
 {
@@ -12,7 +13,13 @@ class BedRoomImageController extends Controller
      */
     public function index()
     {
-        //
+        $data = BedRoomImage::all();
+        if($data->count() != 0 ){
+            return new BedRoomImageCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

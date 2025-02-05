@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProgrammeFidelisationClient;
 use Illuminate\Http\Request;
+use App\Models\ProgrammeFidelisationClient;
+use App\Http\Resources\ProgrammeFidelisationClientCollection;
 
 class ProgrammeFidelisationClientController extends Controller
 {
@@ -12,7 +13,13 @@ class ProgrammeFidelisationClientController extends Controller
      */
     public function index()
     {
-        //
+        $data = ProgrammeFidelisationClient::all();
+        if($data->count() != 0 ){
+            return new ProgrammeFidelisationClientCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

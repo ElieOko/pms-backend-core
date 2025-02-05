@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\TypePlat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\TypePlatCollection;
 
 class TypePlatController extends Controller
 {
@@ -12,7 +14,13 @@ class TypePlatController extends Controller
      */
     public function index()
     {
-        //
+        $data = TypePlat::all();
+        if($data->count() != 0 ){
+            return new TypePlatCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

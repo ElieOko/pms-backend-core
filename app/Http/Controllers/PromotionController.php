@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Promotion;
 use Illuminate\Http\Request;
+use App\Http\Resources\PromotionCollection;
 
 class PromotionController extends Controller
 {
@@ -12,7 +13,13 @@ class PromotionController extends Controller
      */
     public function index()
     {
-        //
+        $data = Promotion::all();
+        if($data->count() != 0 ){
+            return new PromotionCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

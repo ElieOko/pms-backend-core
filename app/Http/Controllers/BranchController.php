@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Branch;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BranchCollection;
 
 class BranchController extends Controller
 {
@@ -13,7 +14,13 @@ class BranchController extends Controller
      */
     public function index()
     {
-        //
+        $data = Branch::all();
+        if($data->count() != 0 ){
+            return new BranchCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

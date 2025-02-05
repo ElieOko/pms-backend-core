@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TypeBedRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\TypeBedRoomCollection;
 
 class TypeBedRoomController extends Controller
 {
@@ -13,7 +14,13 @@ class TypeBedRoomController extends Controller
      */
     public function index()
     {
-        //
+        $data = TypeBedRoom::all();
+        if($data->count() != 0 ){
+            return new TypeBedRoomCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

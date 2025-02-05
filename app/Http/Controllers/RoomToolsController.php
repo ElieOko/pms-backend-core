@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RoomTools;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RoomToolsCollection;
 
 class RoomToolsController extends Controller
 {
@@ -13,7 +14,13 @@ class RoomToolsController extends Controller
      */
     public function index()
     {
-        //
+        $data = RoomTools::all();
+        if($data->count() != 0 ){
+            return new RoomToolsCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**
