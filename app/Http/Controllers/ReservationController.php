@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\ReservationCollection;
 
 class ReservationController extends Controller
@@ -35,7 +36,38 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'parent_space_id'=>'required',
+            'branch_id'=>'required',
+            'client_id'=>'required',
+            'room_id'=>'required',
+            'bed_room_id'=>'required',
+            'start_date' =>'required',
+            'end_date' =>'required',
+            'status' =>'required',        
+
+
+        ]);
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator->errors()
+             ],402);
+        }
+        $field = $validator->validated();
+        Resrvation::updateOrCreate([
+            'parent_space_id'   =>   $field['parent_space_id'],
+            'branch_id'         =>   $field['branch_id'],
+            'client_id'         =>   $field['client_id'],
+            'room_id'           =>   $field['room_id'],
+            'bed_room_id'       =>   $field['bed_room_id'],
+            'start_date'        =>   $field['start_date'],
+            'end_date'          =>   $field['end_date'],
+            'status'            =>   $field['status'],
+
+        ]);
+        return response()->json([
+            'message' => $this->msg_success,
+         ],$this->status_ok);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tools;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\ToolsCollection;
 
 class ToolsController extends Controller
@@ -35,7 +36,25 @@ class ToolsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'nom' =>'required',
+            'parent_space_id'=>'required',
+            'branch_id'=>'required'
+        ]);
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator->errors()
+             ],402);
+        }
+        $field = $validator->validated();
+        Tools::updateOrCreate([
+            'nom'               =>   $field['nom'],
+            'parent_space_id'   =>   $field['parent_space_id'],
+            'branch_id'         =>   $field['branch_id']
+        ]);
+        return response()->json([
+            'message' => $this->msg_success,
+         ],$this->status_ok);
     }
 
     /**

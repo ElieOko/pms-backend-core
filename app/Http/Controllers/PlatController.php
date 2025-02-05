@@ -35,7 +35,28 @@ class PlatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'parent_space_id'=>'required',
+            'branch_id'=>'required',
+            'nom'=>'required',
+            'prix'=>'required',
+        ]);
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator->errors()
+             ],402);
+        }
+        $field = $validator->validated();
+        Plat::updateOrCreate([
+            'parent_space_id'   =>   $field['parent_space_id'],
+            'branch_id'         =>   $field['branch_id'],
+            'nom'          =>   $field['nom'],
+            'prix'           =>   $field['prix'],
+            'image' => $field['image'],
+        ]);
+        return response()->json([
+            'message' => $this->msg_success,
+         ],$this->status_ok);
     }
 
     /**

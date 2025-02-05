@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RoomTools;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\RoomToolsCollection;
 
 class RoomToolsController extends Controller
@@ -35,7 +36,27 @@ class RoomToolsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'parent_space_id'=>'required',
+            'branch_id'=>'required',
+            'tools_id'=>'required',
+            'room_id'=>'required',
+        ]);
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator->errors()
+             ],402);
+        }
+        $field = $validator->validated();
+        RoomTools::updateOrCreate([
+            'parent_space_id'   =>   $field['parent_space_id'],
+            'branch_id'         =>   $field['branch_id'],
+            'tools_id'          =>   $field['tools_id'],
+            'room_id'           =>   $field['room_id'],
+        ]);
+        return response()->json([
+            'message' => $this->msg_success,
+         ],$this->status_ok);
     }
 
     /**
