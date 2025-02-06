@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("capacite")->default("");
             $table->integer("tarif_base")->default(10);
             $table->integer("promotion_tarif")->nullable()->default(10);
+            $table->foreignId('devise_id')->nullable()->index();
             $table->boolean("is_reserve")->default(false);
             $table->timestamps();
         });

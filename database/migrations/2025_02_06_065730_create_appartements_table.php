@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rooms', function (Blueprint $table) {
+        Schema::create('appartements', function (Blueprint $table) {
             $table->id();
             $table->integer("parent_space_id")->default(1);
             $table->foreignId('branch_id')->nullable()->index();
-            $table->string("number_room")->default("AB-12");
+            $table->string("number_appartement")->default("AB-12");
             $table->string("capacite")->default("");
             $table->integer("tarif_base")->default(10);
             $table->integer("promotion_tarif")->nullable()->default(10);
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rooms');
+        Schema::dropIfExists('appartements');
     }
 };
