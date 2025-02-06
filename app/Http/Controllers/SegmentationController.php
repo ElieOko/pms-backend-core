@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Segmentation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\SegmentationCollection;
 
 class SegmentationController extends Controller
@@ -46,7 +47,7 @@ class SegmentationController extends Controller
              ],402);
         }
         $field = $validator->validated();
-        TypeBedRoom::updateOrCreate([
+        Segmentation::updateOrCreate([
             'parent_space_id'   =>   $field['parent_space_id'],
             'branch_id'         =>   $field['branch_id']
         ]);

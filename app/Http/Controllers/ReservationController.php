@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\ReservationCollection;
 
 class ReservationController extends Controller
@@ -54,7 +55,7 @@ class ReservationController extends Controller
              ],402);
         }
         $field = $validator->validated();
-        Resrvation::updateOrCreate([
+        Reservation::updateOrCreate([
             'parent_space_id'   =>   $field['parent_space_id'],
             'branch_id'         =>   $field['branch_id'],
             'client_id'         =>   $field['client_id'],

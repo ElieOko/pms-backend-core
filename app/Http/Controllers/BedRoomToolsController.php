@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BedRoomTools;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\BedRoomToolsCollection;
 
 class BedRoomToolsController extends Controller

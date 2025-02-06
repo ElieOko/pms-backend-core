@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tools;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\ToolsCollection;
 
 class ToolsController extends Controller

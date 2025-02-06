@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Promotion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\PromotionCollection;
 
 class PromotionController extends Controller

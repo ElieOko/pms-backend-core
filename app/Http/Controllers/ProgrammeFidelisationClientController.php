@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProgrammeFidelisationClient;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\ProgrammeFidelisationClientCollection;
 
 class ProgrammeFidelisationClientController extends Controller

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RoomTools;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\RoomToolsCollection;
 
 class RoomToolsController extends Controller

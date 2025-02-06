@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RecettePlat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\RecettePlatCollection;
 
 class RecettePlatController extends Controller
