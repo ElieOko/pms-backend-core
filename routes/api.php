@@ -7,6 +7,7 @@ use App\Http\Controllers\PlatController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\TypePlatController;
 use App\Http\Controllers\TypeClientController;
 use App\Http\Controllers\ReservationController;
@@ -36,6 +37,9 @@ Route::resource('type/programme/fidelisation', TypeProgrammeFidelisationControll
 ->only(['index', 'show','edit','store']);
 
 Route::resource('branch', BranchController::class)
+->only(['index', 'show','edit','store']);
+
+Route::resource('client', ClientController::class)
 ->only(['index', 'show','edit','store']);
 
 Route::resource('cantine', BranchController::class)
