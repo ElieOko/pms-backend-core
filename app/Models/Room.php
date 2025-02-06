@@ -15,6 +15,7 @@ class Room extends Model
         'capacite',
         'tarif_base',
         'promotion_tarif',
-        'devise_id'
+        'devise_id',
+        'is_reserve'
     ];
 }

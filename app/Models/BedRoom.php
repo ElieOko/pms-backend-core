@@ -14,6 +14,7 @@ class BedRoom extends Model
         'capacite',
         'tarif_base',
         'promotion_tarif',
+        'devise_id',
         'is_reserve'
     ];
 }
