@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('bed_room_id')->nullable()->index();
             $table->date('start_date')->nullable(); // Date de début
             $table->date('end_date')->nullable();   // Date de fin
+            $table->boolean("is_expired")->default(false);
             $table->integer('status')->default(0);  // Status (0, 1, 2)
 
             $table->timestamps();

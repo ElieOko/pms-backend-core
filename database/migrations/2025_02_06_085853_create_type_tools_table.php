@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('devises', function (Blueprint $table) {
+        Schema::create('type_tools', function (Blueprint $table) {
             $table->id();
-            $table->integer("parent_space_id")->default(1);
+            $table->foreignId('categorie_type_tool_id')->nullable()->index();
             $table->text("nom");
-            $table->text("code");
-            $table->text("symbole")->nullable();
-            $table->integer("taux")->default(0);
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('devises');
+        Schema::dropIfExists('type_tools');
     }
 };

@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('tools', function (Blueprint $table) {
             $table->id();
-            $table->integer("parent_space_id")->default(1);
-            $table->foreignId('branch_id')->nullable()->index();
+            $table->foreignId('type_tools_id')->nullable()->index();
             $table->string("nom");
             $table->timestamps();
         });

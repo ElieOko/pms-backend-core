@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('type_bed_rooms', function (Blueprint $table) {
             $table->id();
             $table->string("nom");
-            $table->integer("parent_space_id")->default(1);
-            $table->foreignId('branch_id')->nullable()->index();
             $table->timestamps();
         });
     }

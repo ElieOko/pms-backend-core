@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('plats', function (Blueprint $table) {
             $table->id();
+            $table->integer("parent_space_id")->default(1);
+            $table->foreignId('branch_id')->nullable()->index();
             $table->string("nom");
             $table->string("description");
             $table->string("prix");
-            $table->string("image");
-            $table->integer("parent_space_id")->default(1);
-            $table->foreignId('branch_id')->nullable()->index();
+            $table->foreignId('devise_id')->nullable()->index();
+            $table->string("image")->nullable();
             $table->timestamps();
         });
     }
