@@ -42,8 +42,7 @@ class ClientController extends Controller
             'nom'               =>  'required',
             'prenom'            =>  'required',
             'parent_space_id'   =>  'required',
-            'branch_id'         =>  'required',
-            'type_clients_id'   =>  'required',
+            'type_client_id'   =>  'required',
             'telephone'         =>  'string',
             'adress'            =>  'string'
         ]);
@@ -52,7 +51,7 @@ class ClientController extends Controller
             $field = $validator->validated();
             $state = Client::updateOrCreate([
                 'parent_space_id'   =>  $field['parent_space_id'],
-                'branch_id'         =>  $field['branch_id'],
+                // 'branch_id'         =>  $field['branch_id'],
                 'nom'               =>  $field['nom'],
                 'prenom'            =>  $field['prenom'],
                 'type_client_id'    =>  $field['type_client_id']
