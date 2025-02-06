@@ -36,7 +36,30 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'nom'               =>  'required',
+            'prenom'            =>  'required',
+            'parent_space_id'   =>  'required',
+            'branch_id'         =>  'required',
+            'type_clients_id'   =>  'required',
+            'telephone'         =>  'string',
+            'adress'            =>  'string'
+        ]);
+
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator->errors()
+             ],402);
+        }
+        $field = $validator->validated();
+        $state = Client::updateOrCreate([
+            'parent_space_id'   =>  $field['parent_space_id'],
+            'branch_id'         =>  $field['branch_id'],
+            'nom'               =>  $field['nom'],
+            'prenom'            =>  $field['prenom'],
+            'type_client_id'    =>  $field['type_client_id']
+        ]);
+
     }
 
     /**
