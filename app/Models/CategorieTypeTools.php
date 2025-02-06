@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TypeCuisine extends Model
+class CategorieTypeTools extends Model
 {
     //
     protected $fillable = [
