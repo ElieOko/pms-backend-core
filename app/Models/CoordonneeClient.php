@@ -9,7 +9,7 @@ class CoordonneeClient extends Model
     //
     protected $fillable = [
         'parent_space_id',
-        'branch_id',
+        'client_id',
         'telephone',
         'email',
         'adresse'
