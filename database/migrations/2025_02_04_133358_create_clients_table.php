@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->integer("parent_space_id")->default(1);
-            $table->foreignId('coordonnee_client_id')->nullable()->index();
-            $table->foreignId('branch_id')->nullable()->index();
             $table->foreignId('type_clients_id')->nullable()->index();
             $table->string("nom");
             $table->string("prenom");
