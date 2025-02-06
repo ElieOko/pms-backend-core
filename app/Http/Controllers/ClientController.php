@@ -36,6 +36,8 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        $data['error'] = null ;
+        $data['sys']   = "" ;
         $validator = Validator::make($request->all(),[
             'nom'               =>  'required',
             'prenom'            =>  'required',
@@ -46,20 +48,26 @@ class ClientController extends Controller
             'adress'            =>  'string'
         ]);
 
-        if($validator->stopOnFirstFailure()->fails()){
-            return response()->json([
-                'message' => $validator->errors()
-             ],402);
-        }
-        $field = $validator->validated();
-        $state = Client::updateOrCreate([
-            'parent_space_id'   =>  $field['parent_space_id'],
-            'branch_id'         =>  $field['branch_id'],
-            'nom'               =>  $field['nom'],
-            'prenom'            =>  $field['prenom'],
-            'type_client_id'    =>  $field['type_client_id']
-        ]);
+        if(!$validator->stopOnFirstFailure()->fails()){
+            $field = $validator->validated();
+            $state = Client::updateOrCreate([
+                'parent_space_id'   =>  $field['parent_space_id'],
+                'branch_id'         =>  $field['branch_id'],
+                'nom'               =>  $field['nom'],
+                'prenom'            =>  $field['prenom'],
+                'type_client_id'    =>  $field['type_client_id']
+            ]);
 
+            //$data['sys'] = $state;
+            return response()->json([
+                "message"   =>  $this->msg_success,
+                "data"      => $state
+            ],200);
+        }
+        $data['error']  = $validator->errors()??"";
+        return response()->json([
+            "message"   => $data['error'],
+        ],400);
     }
 
     /**
